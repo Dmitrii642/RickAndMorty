@@ -7,23 +7,23 @@
 
 import UIKit
 
-class CharacterViewController: UIViewController {
+final class CharacterViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        view.backgroundColor = .systemBackground
+        title = "Characters"
+        
+        let request = Request(endpoint: .character,
+                              queryParameters: [
+                                URLQueryItem(name: "name", value: "rick"),
+                                URLQueryItem(name: "ststus", value: "alive")])
+        print(request.url)
+        
+        Service.shared.execute(request, expecting: Character.self) { result in
+            
+        }
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

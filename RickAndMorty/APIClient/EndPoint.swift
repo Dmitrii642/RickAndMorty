@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+@frozen enum EndPoint: String {
+    case character
+    case location
+    case episode
+}
