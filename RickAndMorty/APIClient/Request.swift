@@ -14,7 +14,7 @@ final class Request {
     }
  
     private let endpoint: EndPoint
-    private let pathComponents: Set <String>
+    private let pathComponents: [String]
     private let queryParameters: [URLQueryItem]
     
     private var urlString: String {
@@ -47,13 +47,15 @@ final class Request {
     public let httpMethod = "GET"
     
    public init(endpoint: EndPoint,
-         pathComponents: Set<String> = [],
+         pathComponents: [String] = [],
          queryParameters: [URLQueryItem] = []
     ) {
         self.endpoint = endpoint
         self.pathComponents = pathComponents
         self.queryParameters = queryParameters
     }
-    
-    
+}
+
+extension Request {
+    static let listCharactersrequests = Request(endpoint: .character)
 }
