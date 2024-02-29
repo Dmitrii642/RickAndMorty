@@ -7,7 +7,13 @@
 
 import UIKit
 
+protocol CharacterListViewDelegate: AnyObject {
+    func characterListView(_ characterListView: CharacterListView, didSelectCharacter character: Character)
+}
+
 final class CharacterListView: UIView {
+    
+    public weak var delegate: CharacterListViewDelegate?
     
     private let viewModel = CharacterListViewViewModel()
     
@@ -21,12 +27,19 @@ final class CharacterListView: UIView {
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 10, right: 10)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.isHidden = true
         collectionView.alpha = 0
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(CharacterCollectionViewCell.self, forCellWithReuseIdentifier: CharacterCollectionViewCell.cellIdentifier)
+        
+        collectionView.register(CharacterCollectionViewCell.self,
+                                forCellWithReuseIdentifier: CharacterCollectionViewCell.cellIdentifier)
+        
+        collectionView.register(FooterLoadingCollectionReusableView.self,
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
+                                withReuseIdentifier: FooterLoadingCollectionReusableView.identifier)
+        
         return collectionView
     }()
     
@@ -75,6 +88,11 @@ final class CharacterListView: UIView {
 
 // MARK: - CharacterListViewModelDelegate
 extension CharacterListView: CharacterListViewModelDelegate {
+    
+    func didSelectCharacter(_ character: Character) {
+        delegate?.characterListView(self, didSelectCharacter: character)
+    }
+    
     func didLoadInitalcharacters() {
         spinner.stopAnimating()
         collectionView.isHidden = false
@@ -84,4 +102,11 @@ extension CharacterListView: CharacterListViewModelDelegate {
             self.collectionView.alpha = 1
         }
     }
+    
+    func didLoadMoreCharacters(with newIndexPaths: [IndexPath]) {
+        collectionView.performBatchUpdates {
+            self.collectionView.insertItems(at: newIndexPaths)
+        }
+    }
+    
 }
