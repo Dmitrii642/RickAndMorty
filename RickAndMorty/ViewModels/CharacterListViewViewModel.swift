@@ -22,12 +22,15 @@ final class CharacterListViewViewModel: NSObject {
     
     private var characters: [Character] = [] {
         didSet {
-            for character in characters where !cellViewModel.contains(where: {$0.characterName == character.name}) {
+            for character in characters {
                 let viewModel = CharacterCollectionViewCellViewModel(
                     characterName: character.name,
                     characterStatus: character.status,
                     characterImageUrl: URL(string: character.image))
-                cellViewModel.append(viewModel)
+               
+                if !cellViewModel.contains(viewModel) {
+                    cellViewModel.append(viewModel)
+                }
             }
         }
     }
@@ -64,10 +67,8 @@ final class CharacterListViewViewModel: NSObject {
         }
         
         isLoadingMoreCharacters = true
-        print("Fetching more characters")
         guard let request = Request(url: url) else {
             isLoadingMoreCharacters = false
-            print("Failed to create request")
             return
         }
                 
@@ -78,10 +79,10 @@ final class CharacterListViewViewModel: NSObject {
             
             switch result {
             case .success(let responseModel):
+                
                 let moreResults = responseModel.results
                 let info = responseModel.info
                 strongSelf.apiInfo = info
-                
                 
                 let originalCount = strongSelf.characters.count
                 let newCount = moreResults.count
@@ -91,10 +92,13 @@ final class CharacterListViewViewModel: NSObject {
                     return IndexPath(row: $0, section: 0)})
                 
                 strongSelf.characters.append(contentsOf: moreResults)
+                
                 DispatchQueue.main.async {
                     strongSelf.delegate?.didLoadMoreCharacters(with: indexPathsToAdd)
+                    
                     strongSelf.isLoadingMoreCharacters = false
                 }
+                
             case .failure(let failure):
                 print(String(describing: failure))
                 self?.isLoadingMoreCharacters = false
@@ -118,8 +122,7 @@ extension CharacterListViewViewModel: UICollectionViewDataSource, UICollectionVi
            for: indexPath) as? CharacterCollectionViewCell else {
            fatalError("Unsupported cell")
        }
-        let viewModel = cellViewModel[indexPath.row]
-        cell.configure(with: viewModel)
+        cell.configure(with: cellViewModel[indexPath.row])
         return cell
     }
     
@@ -146,7 +149,7 @@ extension CharacterListViewViewModel: UICollectionViewDataSource, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let bounds = UIScreen.main.bounds
+        let bounds = collectionView.bounds
         let width = (bounds.width-30) / 2
         return CGSize(width: width,
                       height: width * 1.5)

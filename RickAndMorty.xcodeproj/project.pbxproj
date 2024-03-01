@@ -36,6 +36,7 @@
 		66229BDE2B8F709200918086 /* CharacterDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66229BDD2B8F709200918086 /* CharacterDetailView.swift */; };
 		66229BE02B8F70CF00918086 /* CharacterDetailViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66229BDF2B8F70CF00918086 /* CharacterDetailViewViewModel.swift */; };
 		66229BE22B8F84D600918086 /* FooterLoadingCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66229BE12B8F84D600918086 /* FooterLoadingCollectionReusableView.swift */; };
+		66229BE42B92261700918086 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66229BE32B92261700918086 /* ImageLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +71,7 @@
 		66229BDD2B8F709200918086 /* CharacterDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailView.swift; sourceTree = "<group>"; };
 		66229BDF2B8F70CF00918086 /* CharacterDetailViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailViewViewModel.swift; sourceTree = "<group>"; };
 		66229BE12B8F84D600918086 /* FooterLoadingCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterLoadingCollectionReusableView.swift; sourceTree = "<group>"; };
+		66229BE32B92261700918086 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +163,7 @@
 		66229B5C2B8631E800918086 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				66229BE32B92261700918086 /* ImageLoader.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -308,6 +311,7 @@
 				66229B622B8632AD00918086 /* Character.swift in Sources */,
 				66229B602B86329B00918086 /* Location.swift in Sources */,
 				66229BDB2B8F6FFD00918086 /* CharacterDetailViewController.swift in Sources */,
+				66229BE42B92261700918086 /* ImageLoader.swift in Sources */,
 				66229BC52B8B821C00918086 /* CharacterCollectionViewCellViewModel.swift in Sources */,
 				66229BC12B8A523000918086 /* Extensions.swift in Sources */,
 				66229B992B87973800918086 /* Service.swift in Sources */,
