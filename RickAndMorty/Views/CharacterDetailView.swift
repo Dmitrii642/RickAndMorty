@@ -10,7 +10,9 @@ import UIKit
 
 final class CharacterDetailView: UIView {
     
-    private var collectionView: UICollectionView?
+    public var collectionView: UICollectionView?
+    
+    private let viewModel: CharacterDetailViewViewModel
     
     private let spinner: UIActivityIndicatorView = {
         let spinner = UIActivityIndicatorView(style: .large)
@@ -19,11 +21,12 @@ final class CharacterDetailView: UIView {
         return spinner
     }()
     
-    override init(frame: CGRect) {
+       init(frame: CGRect, viewModel: CharacterDetailViewViewModel) {
+        self.viewModel = viewModel
         super.init(frame: frame)
-    
+        
         translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = .systemPurple
+        backgroundColor = .systemBackground
         setupViews()
         setConstraints()
     }
@@ -33,25 +36,33 @@ final class CharacterDetailView: UIView {
         fatalError("Unsupported")
     }
     
+    private func setupViews() {
+        let collectionView = createCollectionView()
+        self.collectionView = collectionView
+        addSubviews(collectionView, spinner)
+    }
+    
     private func createCollectionView() -> UICollectionView {
         let layout = UICollectionViewCompositionalLayout { sectionIndex, _ in
             return self.createSection(for: sectionIndex)
         }
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }
     
     private func createSection(for sectionIndex: Int) -> NSCollectionLayoutSection {
+        let sectionTypes = viewModel.sections
         
-    }
-    
-    private func setupViews() {
-        
-        let collectionView = createCollectionView()
-        self.collectionView = collectionView
-        addSubviews(collectionView, spinner)
-        
+        switch sectionTypes[sectionIndex] {
+        case .photo:
+            return viewModel.createPhotoSectionLayout()
+        case .information:
+            return viewModel.createInformationSectionLayout()
+        case .episodes:
+            return viewModel.createEpisodesSectionLayout()
+        }
     }
 }
 
