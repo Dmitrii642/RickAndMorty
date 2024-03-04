@@ -65,8 +65,13 @@ final class Request {
             let components = trimmed.components(separatedBy: "/")
             if !components.isEmpty {
                 let endpointString = components[0]
+                var pathComponents: [String] = []
+                if components.count > 1 {
+                    pathComponents = components
+                    pathComponents.removeFirst()
+                }
                 if let endPoint = EndPoint(rawValue: endpointString) {
-                    self.init(endpoint: endPoint)
+                    self.init(endpoint: endPoint, pathComponents: pathComponents)
                     return
                 }
             }

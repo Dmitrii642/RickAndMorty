@@ -11,6 +11,9 @@ final class CharacterDetailViewController: UIViewController {
     
     private let viewModel: CharacterDetailViewViewModel
     
+    private let detailView = CharacterDetailView()
+    
+    
     init(viewModel: CharacterDetailViewViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -25,7 +28,15 @@ final class CharacterDetailViewController: UIViewController {
         super.viewDidLoad()
         
         setupViews()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action,
+                                                            target: self,
+                                                            action: #selector(didTapShare))
+        view.addSubviews(detailView)
         setConstraints()
+    }
+    
+    @objc private func didTapShare() {
+        print("Tap")
     }
     
     private func setupViews() {
@@ -39,7 +50,10 @@ final class CharacterDetailViewController: UIViewController {
 extension CharacterDetailViewController {
     private func setConstraints() {
         NSLayoutConstraint.activate([
-            
+            detailView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            detailView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
+            detailView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
+            detailView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
 }

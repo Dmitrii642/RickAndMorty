@@ -15,6 +15,9 @@ final class CharacterDetailViewViewModel {
         self.character = character
     }
 
+    public var requestUrl: URL? {
+        return URL(string: character.url)
+    }
     
     public var title: String {
         character.name.uppercased()
@@ -22,9 +25,27 @@ final class CharacterDetailViewViewModel {
     
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError("Unsupported")
     }
     
+//    
+//    public func fetchCharacterData() {
+//        print(character.url)
+//        guard let url = requestUrl,
+//            let request = Request(url: url) else {
+//            return
+//        }
+//        
+//        Service.shared.execute(request, expecting: Character.self) { result in
+//            switch result {
+//            case .success(let success):
+//                print(String(describing: success))
+//            case .failure(let failure):
+//                print(String(describing: failure))
+//            }
+//        }
+//        
+//    }
     
     
     private func setupViews() {
