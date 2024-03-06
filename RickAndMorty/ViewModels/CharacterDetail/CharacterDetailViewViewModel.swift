@@ -59,7 +59,7 @@ final class CharacterDetailViewViewModel {
     }
 
     //MARK: - Information
-    public func createInformationSectionLayout() -> NSCollectionLayoutSection {
+    public func createInfoSectionLayout() -> NSCollectionLayoutSection {
         let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(0.5),
             heightDimension: .fractionalHeight(1.0)))
