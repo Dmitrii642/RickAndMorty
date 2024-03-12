@@ -41,6 +41,7 @@ final class EpisodeDetailViewController: UIViewController {
     
     private func setupDelegate() {
         viewModel.delegate = self
+        detailView.delegate = self
     }
     
     @objc private func didTapShare() {
@@ -66,5 +67,15 @@ extension EpisodeDetailViewController {
 extension EpisodeDetailViewController: EpisodeDetailViewViewModelDelegate {
     func didFetchEpisodeDetails() {
         detailView.configure(with: viewModel)
+    }
+}
+
+//MARK: - EpisodeDetailViewDelegate
+extension EpisodeDetailViewController: EpisodeDetailViewDelegate {
+    func episodeDetailView(_ detailView: EpisodeDetailView, didSelect character: Character) {
+        let vc = CharacterDetailViewController(viewModel: .init(character: character))
+        vc.title = character.name
+        vc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

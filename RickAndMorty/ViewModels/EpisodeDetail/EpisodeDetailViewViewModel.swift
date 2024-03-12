@@ -34,6 +34,13 @@ final class EpisodeDetailViewViewModel {
         self.endpointUrl = endpointUrl
     }
     
+    public func character(at index: Int) -> Character? {
+        guard let dataTuple = dataTuple else {
+            return nil
+        }
+        return dataTuple.characters[index]
+    }
+    
     private func createCellViewModels() {
         guard let dataTuple = dataTuple else {
             return
@@ -41,11 +48,17 @@ final class EpisodeDetailViewViewModel {
         
         let episode = dataTuple.episode
         let characters = dataTuple.characters
+        
+        var createdString = ""
+        if let date = CharacterInfoCollectionViewCellViewModel.dateFormatter.date(from: episode.created) {
+            createdString = CharacterInfoCollectionViewCellViewModel.shortDateFormatter.string(from: date)
+        }
+        
         cellViewModels = [
             .information(viewModel: [.init(title: "Episode name", value: episode.name),
                                      .init(title: "Air Date", value: episode.air_date),
                                      .init(title: "Episode", value: episode.episode),
-                                     .init(title: "Created", value: episode.created)]),
+                                     .init(title: "Created", value: createdString)]),
             .characters(viewModel: characters.compactMap({ character in
                 return CharacterCollectionViewCellViewModel(
                     characterName: character  .name,
