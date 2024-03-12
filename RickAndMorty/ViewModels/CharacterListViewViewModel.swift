@@ -41,7 +41,7 @@ final class CharacterListViewViewModel: NSObject {
     private var apiInfo: GetAllCharactersResponse.Info? = nil
     
    public func fetchCharacters() {
-        Service.shared.execute(.listCharactersrequests,
+        Service.shared.execute(.listCharactersRequest,
                                expecting: GetAllCharactersResponse.self) { [weak self] result in
             switch result {
             case .success(let responseModel):
@@ -96,9 +96,7 @@ final class CharacterListViewViewModel: NSObject {
                 DispatchQueue.main.async {
                     strongSelf.delegate?.didLoadMoreCharacters(with: indexPathsToAdd)
                     
-                    strongSelf.isLoadingMoreCharacters = false
                 }
-                
             case .failure(let failure):
                 print(String(describing: failure))
                 self?.isLoadingMoreCharacters = false

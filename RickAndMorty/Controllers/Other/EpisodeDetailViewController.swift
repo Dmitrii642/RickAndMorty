@@ -7,23 +7,64 @@
 
 import UIKit
 
-class EpisodeDetailViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+final class EpisodeDetailViewController: UIViewController {
+    
+    private let viewModel: EpisodeDetailViewViewModel
+    private let detailView = EpisodeDetailView()
+    
+    
+    init(url: URL?) {
+        self.viewModel = EpisodeDetailViewViewModel(endpointUrl: url)
+        super.init(nibName: nil, bundle: nil)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    required init?(coder: NSCoder) {
+        fatalError("Unsupported")
     }
-    */
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setupViews()
+        setConstraints()
+        setupDelegate()
+    }
+    
+    private func setupViews() {
+        title = "Episode"
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(didTapShare))
+        
+        view.addSubviews(detailView)
+        viewModel.fetchEpisodeData()
+    }
+    
+    private func setupDelegate() {
+        viewModel.delegate = self
+    }
+    
+    @objc private func didTapShare() {
+        
+    }
+    
+    
+}
 
+//MARK: - Set Constraints
+extension EpisodeDetailViewController {
+    private func setConstraints() {
+        NSLayoutConstraint.activate([
+            detailView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            detailView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
+            detailView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
+            detailView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+    }
+}
+
+//MARK: - EpisodeDetailViewViewModelDelegate
+extension EpisodeDetailViewController: EpisodeDetailViewViewModelDelegate {
+    func didFetchEpisodeDetails() {
+        detailView.configure(with: viewModel)
+    }
 }

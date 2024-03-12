@@ -7,23 +7,32 @@
 
 import UIKit
 
-class SearchViewController: UIViewController {
+final class SearchViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    struct Config {
+        enum `Type` {
+            case character
+            case episode
+            case location
+        }
+        let type: `Type`
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private let config: Config
+    
+    init(config: Config) {
+        self.config = config
+        super.init(nibName: nil, bundle: nil)
     }
-    */
-
+    
+    required init?(coder: NSCoder) {
+        fatalError("Unsupported")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        title = "Search"
+        view.backgroundColor = .systemBackground
+    }
+    
 }
