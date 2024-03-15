@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+struct SettingsViewViewModel {
+    let cellViewModels: [SettingsCellViewModel]
+    
+}
