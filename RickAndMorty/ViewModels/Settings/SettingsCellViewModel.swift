@@ -4,7 +4,7 @@
 //
 //  Created by Dmitrii Iakovlev on 12.03.2024.
 //
-
+ 
 import UIKit
 
 struct SettingsCellViewModel: Identifiable {

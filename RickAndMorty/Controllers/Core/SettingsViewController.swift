@@ -5,6 +5,7 @@
 //  Created by Dmitrii Iakovlev on 21.02.2024.
 //
 
+import StoreKit
 import UIKit
 import SwiftUI
 import SafariServices
@@ -61,9 +62,10 @@ final class SettingsViewController: UIViewController {
         if let url = option.targetUrl {
             let vc = SFSafariViewController(url: url)
             present(vc, animated: true)
-            
         } else if option == .rateApp {
-            
+            if let windowScene = view.window?.windowScene {
+                SKStoreReviewController.requestReview(in: windowScene)
+            }
         }
     }
 }
