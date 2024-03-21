@@ -14,12 +14,16 @@ final class EpisodeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupViews()
+        setDelegates()
+        addSearchButton()
+        setConstraints()
+    }
+    
+    private func setupViews() {
         view.backgroundColor = .systemBackground
         title = "Episodes"
         view.addSubview(episodeListView)
-        setConstraints()
-        setDelegates()
-        addSearchButton()
     }
     
     private func setDelegates(){

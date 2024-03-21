@@ -7,15 +7,29 @@
 
 import UIKit
 
-final class LocationViewController: UIViewController {
+final class LocationViewController: UIViewController, LocationViewViewModelDelegate {
+    
+    private let primaryView = LocationView()
+    private let viewModel = LocationViewViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        setupViews()
+        addSearchButton()
+        setDelegate()
+        setConstraints()
+    }
+    
+    private func setupViews() {
         view.backgroundColor = .systemBackground
         title = "Locations"
         
-        addSearchButton()
+        viewModel.fetchLocations()
+    }
+    
+    private func setDelegate() {
+        viewModel.delegate = self
     }
     
     private func addSearchButton() {
@@ -24,5 +38,21 @@ final class LocationViewController: UIViewController {
     
     @objc private func didTapSearch() {
         
+    }
+    
+     func didFetchInitialLocations() {
+        primaryView.configure(with: viewModel)
+    }
+}
+
+//MARK: - Set Constraints
+extension LocationViewController {
+    private func setConstraints() {
+        NSLayoutConstraint.activate([
+            primaryView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            primaryView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
+            primaryView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
+            primaryView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
     }
 }

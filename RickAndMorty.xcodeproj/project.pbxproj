@@ -57,6 +57,12 @@
 		66229C0F2BA0877300918086 /* SettingsCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66229C0E2BA0877300918086 /* SettingsCellViewModel.swift */; };
 		66229C112BA087EA00918086 /* SettingsOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66229C102BA087EA00918086 /* SettingsOption.swift */; };
 		66229C162BA4402900918086 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66229C152BA4402900918086 /* SettingsView.swift */; };
+		66462F762BAB410D00FA2FEA /* GetLocationsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66462F752BAB410D00FA2FEA /* GetLocationsResponse.swift */; };
+		66462F782BAC795B00FA2FEA /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66462F772BAC795B00FA2FEA /* LocationTableViewCell.swift */; };
+		66462F7B2BAC79F100FA2FEA /* LocationTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66462F7A2BAC79F100FA2FEA /* LocationTableViewCellViewModel.swift */; };
+		665BD3FA2BA48A8E003B0C70 /* AnimatedLaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665BD3F92BA48A8E003B0C70 /* AnimatedLaunchScreen.swift */; };
+		665BD3FD2BA494D7003B0C70 /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665BD3FC2BA494D7003B0C70 /* LocationView.swift */; };
+		665BD3FF2BA49863003B0C70 /* LocationViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665BD3FE2BA49863003B0C70 /* LocationViewViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -112,6 +118,12 @@
 		66229C0E2BA0877300918086 /* SettingsCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCellViewModel.swift; sourceTree = "<group>"; };
 		66229C102BA087EA00918086 /* SettingsOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsOption.swift; sourceTree = "<group>"; };
 		66229C152BA4402900918086 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		66462F752BAB410D00FA2FEA /* GetLocationsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetLocationsResponse.swift; sourceTree = "<group>"; };
+		66462F772BAC795B00FA2FEA /* LocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
+		66462F7A2BAC79F100FA2FEA /* LocationTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		665BD3F92BA48A8E003B0C70 /* AnimatedLaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedLaunchScreen.swift; sourceTree = "<group>"; };
+		665BD3FC2BA494D7003B0C70 /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
+		665BD3FE2BA49863003B0C70 /* LocationViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +189,7 @@
 		66229B5A2B8631D600918086 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				665BD3FB2BA494B2003B0C70 /* Location */,
 				66229C122BA43FD500918086 /* SwiftUI */,
 				66229C052B9F68FA00918086 /* EpisodeDetails */,
 				66229BFC2B9A071700918086 /* Episode */,
@@ -190,6 +203,7 @@
 		66229B5B2B8631DD00918086 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				66462F792BAC79CC00FA2FEA /* Locations */,
 				66229C0B2BA086A800918086 /* Settings */,
 				66229C082B9F694F00918086 /* EpisodeDetail */,
 				66229BED2B973EA400918086 /* CharacterDetail */,
@@ -227,6 +241,7 @@
 				66229B442B862E3A00918086 /* AppDelegate.swift */,
 				66229B4F2B862E3D00918086 /* LaunchScreen.storyboard */,
 				66229B4D2B862E3D00918086 /* Assets.xcassets */,
+				665BD3F92BA48A8E003B0C70 /* AnimatedLaunchScreen.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -262,6 +277,7 @@
 			children = (
 				66229BA82B8A2B1B00918086 /* GetAllCharactersResponse.swift */,
 				66229C012B9B613600918086 /* GetAllEpisodesResponse.swift */,
+				66462F752BAB410D00FA2FEA /* GetLocationsResponse.swift */,
 			);
 			path = APIResponseTypes;
 			sourceTree = "<group>";
@@ -349,6 +365,24 @@
 				66229C152BA4402900918086 /* SettingsView.swift */,
 			);
 			path = SwiftUI;
+			sourceTree = "<group>";
+		};
+		66462F792BAC79CC00FA2FEA /* Locations */ = {
+			isa = PBXGroup;
+			children = (
+				665BD3FE2BA49863003B0C70 /* LocationViewViewModel.swift */,
+				66462F7A2BAC79F100FA2FEA /* LocationTableViewCellViewModel.swift */,
+			);
+			path = Locations;
+			sourceTree = "<group>";
+		};
+		665BD3FB2BA494B2003B0C70 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				665BD3FC2BA494D7003B0C70 /* LocationView.swift */,
+				66462F772BAC795B00FA2FEA /* LocationTableViewCell.swift */,
+			);
+			path = Location;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -439,10 +473,12 @@
 				66229B6D2B8634A300918086 /* SettingsViewController.swift in Sources */,
 				66229B672B86346C00918086 /* CharacterViewController.swift in Sources */,
 				66229B452B862E3A00918086 /* AppDelegate.swift in Sources */,
+				665BD3FF2BA49863003B0C70 /* LocationViewViewModel.swift in Sources */,
 				66229B622B8632AD00918086 /* Character.swift in Sources */,
 				66229B602B86329B00918086 /* Location.swift in Sources */,
 				66229BDB2B8F6FFD00918086 /* CharacterDetailViewController.swift in Sources */,
 				66229C022B9B613700918086 /* GetAllEpisodesResponse.swift in Sources */,
+				66462F782BAC795B00FA2FEA /* LocationTableViewCell.swift in Sources */,
 				66229BF72B99FBEB00918086 /* APICacheManager.swift in Sources */,
 				66229BE42B92261700918086 /* ImageLoader.swift in Sources */,
 				66229BC52B8B821C00918086 /* CharacterCollectionViewCellViewModel.swift in Sources */,
@@ -464,9 +500,13 @@
 				66229C042B9B73B900918086 /* SearchViewController.swift in Sources */,
 				66229BBD2B8A4CC400918086 /* CharacterListViewViewModel.swift in Sources */,
 				66229BC32B8B80D600918086 /* CharacterCollectionViewCell.swift in Sources */,
+				66462F762BAB410D00FA2FEA /* GetLocationsResponse.swift in Sources */,
 				66229C002B9A09C300918086 /* EpisodeListViewViewModel.swift in Sources */,
 				66229BE02B8F70CF00918086 /* CharacterDetailViewViewModel.swift in Sources */,
 				66229C0F2BA0877300918086 /* SettingsCellViewModel.swift in Sources */,
+				66462F7B2BAC79F100FA2FEA /* LocationTableViewCellViewModel.swift in Sources */,
+				665BD3FA2BA48A8E003B0C70 /* AnimatedLaunchScreen.swift in Sources */,
+				665BD3FD2BA494D7003B0C70 /* LocationView.swift in Sources */,
 				66229BA12B87A02500918086 /* SingleLocation.swift in Sources */,
 				66229C0A2B9F69DB00918086 /* EpisodeInfoCollectionViewCellViewModel.swift in Sources */,
 			);
@@ -615,6 +655,8 @@
 				DEVELOPMENT_TEAM = Q453TK55P5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RickAndMorty/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Rick & Morty";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -645,6 +687,8 @@
 				DEVELOPMENT_TEAM = Q453TK55P5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RickAndMorty/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Rick & Morty";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
