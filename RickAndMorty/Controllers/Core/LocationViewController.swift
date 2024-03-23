@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class LocationViewController: UIViewController, LocationViewViewModelDelegate {
+final class LocationViewController: UIViewController {
     
     private let primaryView = LocationView()
     private let viewModel = LocationViewViewModel()
@@ -25,11 +25,13 @@ final class LocationViewController: UIViewController, LocationViewViewModelDeleg
         view.backgroundColor = .systemBackground
         title = "Locations"
         
+        view.addSubview(primaryView)
         viewModel.fetchLocations()
     }
     
     private func setDelegate() {
         viewModel.delegate = self
+        primaryView.delegate  = self
     }
     
     private func addSearchButton() {
@@ -40,9 +42,6 @@ final class LocationViewController: UIViewController, LocationViewViewModelDeleg
         
     }
     
-     func didFetchInitialLocations() {
-        primaryView.configure(with: viewModel)
-    }
 }
 
 //MARK: - Set Constraints
@@ -54,5 +53,22 @@ extension LocationViewController {
             primaryView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
             primaryView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+    }
+}
+
+//MARK: - LocationViewViewModelDelegate
+extension LocationViewController: LocationViewViewModelDelegate {
+    
+    func didFetchInitialLocations() {
+        primaryView.configure(with: viewModel)
+    }
+}
+
+//MARK: - LocationViewDelegate
+extension LocationViewController: LocationViewDelegate {
+    func locationView(_ loactionView: LocationView, didSelect location: Location) {
+        let vc = LocationDetailViewController(location: location)
+        vc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

@@ -8,7 +8,7 @@
 import UIKit
 
 protocol LocationViewDelegate: AnyObject {
-    func LocationView(_ loactionView: LocationView, didSelect location: Location)
+    func locationView(_ loactionView: LocationView, didSelect location: Location)
 }
 
 final class LocationView: UIView {
@@ -96,7 +96,7 @@ extension LocationView: UITableViewDelegate {
         guard let locationModel = viewModel?.location(at: indexPath.row) else {
             return
         }
-        delegate?.LocationView(self, didSelect: locationModel)
+        delegate?.locationView(self, didSelect: locationModel)
     }
 }
 

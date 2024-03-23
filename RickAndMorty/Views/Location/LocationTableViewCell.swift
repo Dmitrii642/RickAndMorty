@@ -60,10 +60,10 @@ class LocationTableViewCell: UITableViewCell {
     }
     
     public func configure(with viewModel: LocationTableViewCellViewModel) {
-        
+        nameLabel.text = viewModel.name
+        typeLabel.text = viewModel.type
+        dimensionLabel.text = viewModel.dimension
     }
-    
-    
 }
 
 //MARK: - Set Constraints
