@@ -52,6 +52,16 @@ final class SearchViewController: UIViewController {
                                                             style: .done,
                                                             target: self,
                                                             action: #selector(didTapExecuteSearch))
+        setDelegate()
+    }
+    
+    private func setDelegate() {
+        searchView.delegate = self
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        searchView.presentKeyboard()
     }
     
     private func setupViews() {
@@ -75,5 +85,12 @@ extension SearchViewController {
             searchView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
             searchView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+    }
+}
+
+//MARK: - SearchViewDelegate
+extension SearchViewController: SearchViewDelegate {
+    func searchView(_ searchView: SearchView, didSelectOption option: SearchInputViewViewModel.DynamicOption) {
+        print("Should present option picker")
     }
 }

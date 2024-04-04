@@ -7,11 +7,17 @@
 
 import UIKit
 
+protocol SearchViewDelegate: AnyObject {
+    func searchView(_ searchView: SearchView, didSelectOption option: SearchInputViewViewModel.DynamicOption)
+}
+
 final class SearchView: UIView {
+    
+    weak var delegate: SearchViewDelegate?
     
     private let viewModel: SearchViewViewModel
     private let noResultsView = NoSearchResultsView()
-    private let swarchInputView = SearchInputView()
+    private let searchInputView = SearchInputView()
     
      init(frame: CGRect, viewModel: SearchViewViewModel) {
         self.viewModel = viewModel
@@ -32,8 +38,13 @@ final class SearchView: UIView {
         backgroundColor = .systemBackground
         translatesAutoresizingMaskIntoConstraints = false
         
-        addSubviews(noResultsView, swarchInputView)
-        swarchInputView.configure(with: SearchInputViewViewModel(type: viewModel.config.type))
+        addSubviews(noResultsView, searchInputView)
+        searchInputView.configure(with: SearchInputViewViewModel(type: viewModel.config.type))
+        searchInputView.delegate = self
+    }
+    
+    public func presentKeyboard() {
+        searchInputView.presentKeyboard()
     }
 }
 
@@ -41,10 +52,10 @@ final class SearchView: UIView {
 extension SearchView {
     private func setConstraints() {
         NSLayoutConstraint.activate([
-            swarchInputView.topAnchor.constraint(equalTo: topAnchor),
-            swarchInputView.leftAnchor.constraint(equalTo: leftAnchor),
-            swarchInputView.rightAnchor.constraint(equalTo: rightAnchor),
-            swarchInputView.heightAnchor.constraint(equalToConstant: 110),
+            searchInputView.topAnchor.constraint(equalTo: topAnchor),
+            searchInputView.leftAnchor.constraint(equalTo: leftAnchor),
+            searchInputView.rightAnchor.constraint(equalTo: rightAnchor),
+            searchInputView.heightAnchor.constraint(equalToConstant: viewModel.config.type == .episode ? 55 : 110),
             
             noResultsView.widthAnchor.constraint(equalToConstant: 150),
             noResultsView.heightAnchor.constraint(equalToConstant: 150),
@@ -72,5 +83,12 @@ extension SearchView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
+    }
+}
+
+//MARK: - SearchInputViewDelegate
+extension SearchView: SearchInputViewDelegate {
+    func searchInputView(_ inputView: SearchInputView, didSelectOption option: SearchInputViewViewModel.DynamicOption) {
+        delegate?.searchView(self, didSelectOption: option)
     }
 }
