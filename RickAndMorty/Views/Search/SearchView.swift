@@ -11,6 +11,7 @@ final class SearchView: UIView {
     
     private let viewModel: SearchViewViewModel
     private let noResultsView = NoSearchResultsView()
+    private let swarchInputView = SearchInputView()
     
      init(frame: CGRect, viewModel: SearchViewViewModel) {
         self.viewModel = viewModel
@@ -31,7 +32,8 @@ final class SearchView: UIView {
         backgroundColor = .systemBackground
         translatesAutoresizingMaskIntoConstraints = false
         
-        addSubviews(noResultsView)
+        addSubviews(noResultsView, swarchInputView)
+        swarchInputView.configure(with: SearchInputViewViewModel(type: viewModel.config.type))
     }
 }
 
@@ -39,6 +41,11 @@ final class SearchView: UIView {
 extension SearchView {
     private func setConstraints() {
         NSLayoutConstraint.activate([
+            swarchInputView.topAnchor.constraint(equalTo: topAnchor),
+            swarchInputView.leftAnchor.constraint(equalTo: leftAnchor),
+            swarchInputView.rightAnchor.constraint(equalTo: rightAnchor),
+            swarchInputView.heightAnchor.constraint(equalToConstant: 110),
+            
             noResultsView.widthAnchor.constraint(equalToConstant: 150),
             noResultsView.heightAnchor.constraint(equalToConstant: 150),
             noResultsView.centerXAnchor.constraint(equalTo: centerXAnchor),
