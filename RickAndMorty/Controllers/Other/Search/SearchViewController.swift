@@ -43,7 +43,7 @@ final class SearchViewController: UIViewController {
     init(config: Config) {
         let viewModel = SearchViewViewModel(config: config)
         self.viewModel = viewModel
-        self.searchView = SearchView(frame: .zero, viewModel: SearchViewViewModel(config: config))
+        self.searchView = SearchView(frame: .zero, viewModel: viewModel)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -68,7 +68,7 @@ final class SearchViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+        super.viewDidDisappear(animated)
         searchView.presentKeyboard()
     }
     
