@@ -15,6 +15,14 @@ final class SearchViewController: UIViewController {
             case episode
             case location
             
+            var endpoint: EndPoint{
+                switch self {
+                case .character: return .character
+                case .episode: return .episode
+                case .location: return .location
+                }
+            }
+            
             var title: String {
                 switch self {
                 case .character:
@@ -91,7 +99,9 @@ extension SearchViewController {
 //MARK: - SearchViewDelegate
 extension SearchViewController: SearchViewDelegate {
     func searchView(_ searchView: SearchView, didSelectOption option: SearchInputViewViewModel.DynamicOption) {
-        let vc = SearchOptionPickerViewController()
+        let vc = SearchOptionPickerViewController(option: option) { selection in
+            print("Did select \(selection)")
+        }
         vc.sheetPresentationController?.detents = [.medium()]
         vc.sheetPresentationController?.prefersGrabberVisible = true
         present(vc, animated: true)
