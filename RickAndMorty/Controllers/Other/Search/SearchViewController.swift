@@ -91,6 +91,9 @@ extension SearchViewController {
 //MARK: - SearchViewDelegate
 extension SearchViewController: SearchViewDelegate {
     func searchView(_ searchView: SearchView, didSelectOption option: SearchInputViewViewModel.DynamicOption) {
-        print("Should present option picker")
+        let vc = SearchOptionPickerViewController()
+        vc.sheetPresentationController?.detents = [.medium()]
+        vc.sheetPresentationController?.prefersGrabberVisible = true
+        present(vc, animated: true)
     }
 }
