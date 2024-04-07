@@ -33,7 +33,6 @@ final class SearchInputView: UIView {
         }
     }
     
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -41,12 +40,9 @@ final class SearchInputView: UIView {
         setConstraints()
     }
     
-    
     required init?(coder: NSCoder) {
         fatalError()
     }
-    
-    
     
     private func setupViews() {
         translatesAutoresizingMaskIntoConstraints = false
@@ -69,7 +65,7 @@ final class SearchInputView: UIView {
         addSubview(stackView)
         
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: searchBar.topAnchor),
+            stackView.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
             stackView.leftAnchor.constraint(equalTo: leftAnchor),
             stackView.rightAnchor.constraint(equalTo: rightAnchor ),
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor)
@@ -112,8 +108,6 @@ final class SearchInputView: UIView {
         let tag = sender.tag
         let selected = options[tag]
         delegate?.searchInputView(self, didSelectOption: selected)
-        
-        print("Did tap \(selected.rawValue)")
     }
     
     public func presentKeyboard() {
@@ -127,7 +121,7 @@ extension SearchInputView {
         NSLayoutConstraint.activate([
             searchBar.topAnchor.constraint(equalTo: topAnchor),
             searchBar.leftAnchor.constraint(equalTo: leftAnchor),
-            searchBar.rightAnchor.constraint(equalTo: rightAnchor ),
+            searchBar.rightAnchor.constraint(equalTo: rightAnchor),
             searchBar.heightAnchor.constraint(equalToConstant: 58)
         ])
     }

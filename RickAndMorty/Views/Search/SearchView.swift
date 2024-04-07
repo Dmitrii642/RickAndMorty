@@ -27,12 +27,9 @@ final class SearchView: UIView {
         setConstraints()
     }
     
-    
     required init?(coder: NSCoder) {
         fatalError()
     }
-    
-    
     
     private func setupViews() {
         backgroundColor = .systemBackground
